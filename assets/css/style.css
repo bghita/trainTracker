@@ -1,6 +1,5 @@
 .jumbotron {
     background-image: url("../images/train.jpg");
-    background-image: 100%;
 }
 .head1 {
     font-family: 'Lobster', cursive;
@@ -9,6 +8,6 @@
     
 }
 .head2 {
-    color: whitesmoke;
+    color: rgba(245, 245, 245, 0.808);
     font-family: 'Satisfy', cursive;
 }

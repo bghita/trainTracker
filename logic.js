@@ -11,23 +11,42 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
   var database = firebase.database();
-
   var connectionsRef = database.ref("/connections");
-
   var connectedRef = database.ref(".info/connected");
+
+  function Train(name, destination, time, group){
+      this.name = name,
+      this.destination = destination,
+      this.time = time,
+      this.group = group
+  }
+
+  let trainArray = []
 
   connectedRef.on("value", function(snap) {
 
     if (snap.val()) {
     var con = connectionsRef.push(true);
-
     con.onDisconnect().remove();
   }
 });
 
-// When first loaded or when the connections list changes...
-connectionsRef.on("value", function(snapshot) {
+$('#submit-bid').on('click', function(event){
+    event.preventDefault()
+    let trainName = $('#bidder-name').val()
+    let trainDestination = $('#bidder-des').val()
+    let trainTime = $('#bidder-time').val()
+    let trainGroup = $('#bidder-freq').val()
 
-  // Display the viewer count in the html.
-  $("#watchers").text(snapshot.numChildren());
+    var train = new Train(trainName, trainDestination, trainGroup, trainTime);
+    trainArray.push(train)
+
+    database.ref().set({
+        trains: trainArray
+    })
 });
+
+database.ref().on('value', function(snap) {
+    trainArray = snap.val().trains
+    console.log(trainArray)
+})
