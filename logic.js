@@ -21,7 +21,7 @@ const firebaseConfig = {
       this.group = group
   }
 
-  let trainArray = []
+  let trainArray = [];
 
   connectedRef.on("value", function(snap) {
 
@@ -39,7 +39,8 @@ $('#submit-bid').on('click', function(event){
     let trainGroup = $('#bidder-freq').val()
 
     var train = new Train(trainName, trainDestination, trainGroup, trainTime);
-    trainArray.push(train)
+    
+    trainArray.push(train);
 
     database.ref().set({
         trains: trainArray
@@ -47,6 +48,20 @@ $('#submit-bid').on('click', function(event){
 });
 
 database.ref().on('value', function(snap) {
-    trainArray = snap.val().trains
+    data = snap.val().trains;
+    trainArray = data; 
     console.log(trainArray)
+    // trainArray // this is a array [] to access information in an array i used the [] and the index of the item i want.
+    // trainArray[0] // this is an json object. We can tell it is an object since we used curly brackets. 
+    // trainArray[0].destination // this is now a string "NewJersey"
+    const $tr =  $("<tr>");
+    const $td = $("<td>");
+    $td.text(trainArray[0].name);
+    const $td2 = $("<td>");
+    $td2.text(trainArray[0].destination);
+    const $td3 = $("<td>");
+    $td3.text(trainArray[0].time);
+    
+
+    $(".results").append(trainArray[0].destination)
 })
