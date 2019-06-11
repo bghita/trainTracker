@@ -1,13 +1,19 @@
 .jumbotron {
-    background-image: url("../images/train.jpg");
+    background-image: url("../images/hill.jpg");
+    background-size: 1110px 245px;
 }
 .head1 {
     font-family: 'Lobster', cursive;
     color: whitesmoke;
     font-size: 380%;
-    
+
 }
 .head2 {
     color: rgba(245, 245, 245, 0.808);
     font-family: 'Satisfy', cursive;
+}
+.background{
+    background-image: url("../images/2.jpg");
+    background-repeat: no-repeat;
+    background-size: 2600px 1110px;
 }
