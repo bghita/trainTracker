@@ -46,6 +46,26 @@ $('#submit-bid').on('click', function (event) {
         trains: trainArray
     })
 });
+
+$(document).ready(function (){
+    $(".form-control").on("submit", function(event){
+        event.preventDefault();
+        $.ajax({
+            url:$(this).attr("#submit-bid") || window.location.pathname,
+            data:$(this).serialize(),
+            sucsess: function(data){
+                $("form-control").html(data);
+            },
+            error:function(error){
+                if (error) {
+                    console.log(error)
+                }
+            }
+            
+        })
+    })
+})
+
 database.ref().once("value", function (snap) {
     trainArray = snap.val().trains
     if (trainArray) {
